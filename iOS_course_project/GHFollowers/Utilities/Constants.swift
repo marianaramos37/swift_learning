@@ -1,10 +1,3 @@
-//
-//  Constants.swift
-//  GHFollowers
-//
-//  Created by koala panda on 2024/05/10.
-//
-
 import UIKit
 
 enum SFSymbols {

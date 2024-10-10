@@ -1,10 +1,3 @@
-//
-//  UIHelper.swift
-//  GHFollowers
-//
-//  Created by koala panda on 2024/05/05.
-//
-
 import UIKit
 
 enum UIHelper {

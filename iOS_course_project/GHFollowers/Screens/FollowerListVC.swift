@@ -60,8 +60,6 @@ class FollowerListVC: GFDataLoadingVC {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItem = addButton
     }
 
     func configureCollectionView() {
@@ -199,46 +197,6 @@ extension FollowerListVC: UISearchResultsUpdating {
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
         setNeedsUpdateContentUnavailableConfiguration()
-    }
-
-
-    @objc func addButtonTapped() {
-        showLoadingView()
-
-        Task {
-            do {
-                let user = try await NetworkManager.shared.getUserInfo(for: username)
-                addUserToFavorites(user: user)
-                dismissLoadingView()
-            } catch {
-                if let gfError = error as? GFError {
-                    presentGFAlert(title: "Something Went Wrong", message: gfError.rawValue, buttonTitle: "Ok")
-                } else {
-                    presentDefaulError()
-                }
-
-                dismissLoadingView()
-            }
-        }
-    }
-
-
-    func addUserToFavorites(user: User) {
-        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-
-        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-            guard let self else { return }
-
-            guard let error else {
-                DispatchQueue.main.async {
-                    self.presentGFAlert(title: "Success!", message: "You have successjully favorited this user🎉", buttonTitle: "Hooray!")
-                }
-                return
-            }
-            DispatchQueue.main.async {
-                self.presentGFAlert(title: "something went wrong", message: error.rawValue, buttonTitle: "ok")
-            }
-        }
     }
 }
 

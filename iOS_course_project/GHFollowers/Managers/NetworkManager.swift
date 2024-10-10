@@ -1,10 +1,3 @@
-//
-//  NetworkManager.swift
-//  GHFollowers
-//
-//  Created by koala panda on 2024/05/03.
-//
-
 import UIKit
 
 class NetworkManager {

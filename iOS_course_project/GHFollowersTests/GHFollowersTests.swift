@@ -1,10 +1,3 @@
-//
-//  GHFollowersTests.swift
-//  GHFollowersTests
-//
-//  Created by koala panda on 2024/04/29.
-//
-
 import XCTest
 @testable import GHFollowers
 

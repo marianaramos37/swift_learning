@@ -1,10 +1,3 @@
-//
-//  GHFollowersUITests.swift
-//  GHFollowersUITests
-//
-//  Created by koala panda on 2024/04/29.
-//
-
 import XCTest
 
 final class GHFollowersUITests: XCTestCase {
