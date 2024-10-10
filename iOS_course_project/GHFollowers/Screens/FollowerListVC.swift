@@ -1,10 +1,10 @@
 import UIKit
 
-protocol FollowerListVCDelgate: AnyObject {
+protocol UsersListViewControllerDelgate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
-class FollowerListVC: GFDataLoadingVC {
+class UsersListViewController: GFDataLoadingVC {
 
     enum Section { case main }
 
@@ -153,7 +153,7 @@ class FollowerListVC: GFDataLoadingVC {
 }
 
 
-extension FollowerListVC: UICollectionViewDelegate {
+extension UsersListViewController: UICollectionViewDelegate {
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY       = scrollView.contentOffset.y
@@ -175,7 +175,7 @@ extension FollowerListVC: UICollectionViewDelegate {
         let activeArray = isSearching ? filteredFollowers : followers
         let follower    = activeArray[indexPath.item]
 
-        let destVC        = UserInfoVC()
+        let destVC        = UserInfoViewController()
         destVC.username   = follower.login
         destVC.delegate   = self
         let navController = UINavigationController(rootViewController: destVC)
@@ -184,7 +184,7 @@ extension FollowerListVC: UICollectionViewDelegate {
 }
 
 
-extension FollowerListVC: UISearchResultsUpdating {
+extension UsersListViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
@@ -200,7 +200,7 @@ extension FollowerListVC: UISearchResultsUpdating {
     }
 }
 
-extension FollowerListVC: UserInfoVCDelgate {
+extension UsersListViewController: UserInfoViewControllerDelgate {
 
     func didRequestFollowers(for username: String) {
         self.username = username

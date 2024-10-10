@@ -1,11 +1,11 @@
 import UIKit
 import SafariServices
 
-protocol UserInfoVCDelgate: AnyObject {
+protocol UserInfoViewControllerDelgate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
-class UserInfoVC: GFDataLoadingVC {
+class UserInfoViewController: GFDataLoadingVC {
     let scrollView = UIScrollView()
     let contentView = UIView()
 
@@ -16,7 +16,7 @@ class UserInfoVC: GFDataLoadingVC {
     var itemViews: [UIView] = []
 
     var username: String!
-    weak var delegate: UserInfoVCDelgate!
+    weak var delegate: UserInfoViewControllerDelgate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +110,7 @@ class UserInfoVC: GFDataLoadingVC {
     }
 }
 
-extension UserInfoVC: GFRepoItemVCDelegate {
+extension UserInfoViewController: GFRepoItemVCDelegate {
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             presentGFAlert(title: "Invalid URL", message: "The url attached to this user is invalid", buttonTitle: "Ok")
@@ -120,7 +120,7 @@ extension UserInfoVC: GFRepoItemVCDelegate {
     }
 }
 
-extension UserInfoVC: GFFollowerItemVCDelegate {
+extension UserInfoViewController: GFFollowerItemVCDelegate {
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else {
             presentGFAlert(title: "No followers", message: "This user has no followers. What a shame 😞", buttonTitle: "So sad")

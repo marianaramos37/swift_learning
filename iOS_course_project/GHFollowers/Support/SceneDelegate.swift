@@ -9,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: FollowerListVC(username: "jumaruba"))
+        window?.rootViewController = UINavigationController(rootViewController: UsersListViewController(username: "jumaruba"))
         window?.makeKeyAndVisible()
     }
 
